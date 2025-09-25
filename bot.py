@@ -1160,8 +1160,16 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main():
     """Fungsi utama untuk menjalankan bot"""
     
-    # Setup bot
-    application = Application.builder().token(config.BOT_TOKEN).build()
+    # Setup bot - FIX: Gunakan approach yang lebih kompatibel
+    try:
+        # Cara yang lebih kompatibel untuk berbagai versi
+        application = Application.builder().token(config.BOT_TOKEN).build()
+    except Exception as e:
+        logger.error(f"Error creating application: {e}")
+        # Fallback untuk versi yang lebih lama
+        from telegram.ext import Updater
+        updater = Updater(token=config.BOT_TOKEN, use_context=True)
+        application = updater.application
     
     # Add handlers
     application.add_handler(CommandHandler("start", start))
@@ -1188,7 +1196,10 @@ def main():
     print("🤖 Bot absensi sedang berjalan...")
     print("Tekan Ctrl+C untuk menghentikan")
     
-    application.run_polling()
+    try:
+        application.run_polling()
+    except Exception as e:
+        logger.error(f"Error running bot: {e}")
 
 if __name__ == "__main__":
     main()
