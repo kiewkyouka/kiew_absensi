@@ -370,8 +370,7 @@ async def end_break_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 display_name = type_names.get(br_type, br_type.capitalize())
                 break_details.append(f"• {display_name}: {count} kali")
             
-            detail = f"""
-📊 Detail Istirahat:
+            detail = f"""📊 Detail Istirahat:
 • Jenis: {break_type}
 • Mulai: {start_time.split(' ')[1]}
 • Selesai: {end_time.split(' ')[1]}
@@ -379,8 +378,7 @@ async def end_break_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • Total istirahat hari ini: {total_breaks} kali
 
 📈 Breakdown per Jenis:
-{chr(10).join(break_details)}
-            """
+{chr(10).join(break_details)}"""
             
             message_with_mention = format_message_with_mention(user, f"{end_msg}\n{detail}")
             await update.message.reply_text(message_with_mention)
@@ -465,7 +463,7 @@ async def attendance_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         return
     
     # Format laporan dengan mention
-    report = f"👤 {format_message_with_mention(user, '').split('\\n')[0]}\n"
+    report = f"👤 {format_message_with_mention(user, '').split(chr(10))[0]}\n"
     report += f"📊 LAPORAN ABSENSI - {title.upper()}\n"
     report += f"Periode: {start_date} sampai {end_date}\n"
     report += "─" * 40 + "\n\n"
@@ -618,7 +616,7 @@ async def view_all_attendance(query):
         await query.edit_message_text(message_with_mention)
         return
     
-    report = f"👤 {format_message_with_mention(user, '').split('\\n')[0]}\n"
+    report = f"👤 {format_message_with_mention(user, '').split(chr(10))[0]}\n"
     report += "📊 LAPORAN ABSENSI HARIAN (Admin)\n"
     report += f"Tanggal: {today}\n"
     report += "─" * 50 + "\n"
@@ -657,7 +655,7 @@ async def view_employees(query):
         await query.edit_message_text(message_with_mention)
         return
     
-    report = f"👤 {format_message_with_mention(user, '').split('\\n')[0]}\n"
+    report = f"👤 {format_message_with_mention(user, '').split(chr(10))[0]}\n"
     report += "👥 DATA KARYAWAN\n"
     report += "─" * 40 + "\n"
     
@@ -825,8 +823,7 @@ async def show_system_stats(query):
     cursor = db.conn.execute('SELECT COUNT(*) FROM breaks')
     total_breaks_all = cursor.fetchone()[0]
     
-    stats_text = f"""
-👤 {format_message_with_mention(user, '').split('\\n')[0]}
+    stats_text = f"""👤 {format_message_with_mention(user, '').split(chr(10))[0]}
 📈 **STATISTIK SISTEM** 📈
 
 👥 **Data Karyawan:**
@@ -848,8 +845,7 @@ async def show_system_stats(query):
 🔄 **Status Sistem:**
 • Database: ✅ Normal
 • Scheduler: ✅ Berjalan
-• Bot: ✅ Online
-    """
+• Bot: ✅ Online"""
     
     await query.edit_message_text(stats_text, parse_mode='Markdown', reply_markup=keyboards.owner_keyboard())
 
@@ -861,8 +857,7 @@ async def manage_admins(query):
     admin_list = "\n".join([f"• @{admin}" for admin in config.ADMIN_USERNAMES])
     owner_list = "\n".join([f"• 👑 @{owner}" for owner in config.OWNER_USERNAMES])
     
-    admin_text = f"""
-👤 {format_message_with_mention(user, '').split('\\n')[0]}
+    admin_text = f"""👤 {format_message_with_mention(user, '').split(chr(10))[0]}
 👥 **PENGELOLAAN ADMINISTRATOR**
 
 **Owner saat ini:**
@@ -881,8 +876,7 @@ OWNER_USERNAMES = ['owner1', 'owner2']
 
 **Catatan:**
 - Owner dan Admin memiliki akses penuh
-- Perubahan memerlukan restart bot
-    """
+- Perubahan memerlukan restart bot"""
     
     await query.edit_message_text(admin_text, parse_mode='Markdown', reply_markup=keyboards.owner_keyboard())
 
@@ -1110,8 +1104,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = user.id
     username = user.username
     
-    help_text = """
-🆘 **BANTUAN SISTEM ABSENSI** 🆘
+    help_text = """🆘 **BANTUAN SISTEM ABSENSI** 🆘
 
 **Fitur Utama:**
 🟢 **Masuk Kerja** - Absensi saat datang kerja
@@ -1138,8 +1131,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 **Tips:**
 - Pastikan terkoneksi internet saat absensi
 - Gunakan tombol sesuai urutan aktivitas
-- Hubungi admin jika ada kendala
-    """
+- Hubungi admin jika ada kendala"""
     
     message_with_mention = format_message_with_mention(user, help_text)
     await update.message.reply_text(message_with_mention, parse_mode='Markdown')
