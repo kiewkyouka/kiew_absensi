@@ -1,0 +1,8 @@
+absensi-bot/
+├── bot.py
+├── database.py
+├── config.py
+├── keyboards.py
+├── utils.py
+├── user_data.json
+└── requirements.txt

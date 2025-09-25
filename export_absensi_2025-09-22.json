@@ -1,0 +1,18 @@
+[
+  {
+    "nama": "Eiko 英子",
+    "tanggal": "2025-09-22",
+    "check_in": "10:01:18",
+    "check_out": null,
+    "terlambat_menit": 106,
+    "lembur_menit": 0
+  },
+  {
+    "nama": "Safa Chan Nami",
+    "tanggal": "2025-09-22",
+    "check_in": "09:53:07",
+    "check_out": "11:25:44",
+    "terlambat_menit": 98,
+    "lembur_menit": 0
+  }
+]
